@@ -22,3 +22,13 @@ export interface IBasketState {
   totalPrice: number
   totalCount: number
 }
+export interface IOrderCustomer {
+  name: string
+  address: string
+  phone: string
+}
+
+export interface IOrder extends IOrderCustomer {
+  items: IBasket[]
+  totalPrice: number
+}
