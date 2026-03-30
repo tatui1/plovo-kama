@@ -1,10 +1,10 @@
-import { TextField, Button, Box } from '@mui/material'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
-import type { IOrderCustomer } from '../../types'
+import { TextField, Button, Box } from '@mui/material';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+import type { IOrderCustomer } from '../../types';
 
 interface Props {
-  onSubmit: (customer: IOrderCustomer) => void
-  loading: boolean
+  onSubmit: (customer: IOrderCustomer) => void;
+  loading: boolean;
 }
 
 export const OrderForm = ({ onSubmit, loading }: Props) => {
@@ -12,20 +12,17 @@ export const OrderForm = ({ onSubmit, loading }: Props) => {
     name: '',
     address: '',
     phone: ''
-  })
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setCustomer(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+    const { name, value } = e.target;
+    setCustomer(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    onSubmit(customer)
-  }
+    e.preventDefault();
+    onSubmit(customer);
+  };
 
   return (
     <Box 
@@ -63,9 +60,10 @@ export const OrderForm = ({ onSubmit, loading }: Props) => {
         color="success" 
         size="large"
         disabled={loading}
-        sx={{ mt: 2 }}>
+        sx={{ mt: 2 }}
+      >
         {loading ? 'Processing...' : 'Place Order'}
       </Button>
     </Box>
-  )
-}
+  );
+};

@@ -1,77 +1,44 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import { useNavigate } from 'react-router';
+import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { Link as RouterLink } from 'react-router';
 
-interface Props{
-  totalCount: number
-  totalPrice: number
+// ВОТ ЗДЕСЬ БЫЛА ОШИБКА: Нужно обязательно добавить totalPrice в интерфейс
+interface Props {
+  totalCount: number;
+  totalPrice: number; // Добавили это поле
 }
 
-export const Header = ({totalCount, totalPrice}:Props) => {
-    const navigate = useNavigate()
+export const Header = ({ totalCount, totalPrice }: Props) => {
+  return (
+    <AppBar position="static" sx={{ mb: 3 }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* Логотип приложения */}
+        <Typography 
+          variant="h6" 
+          component={RouterLink} 
+          to="/" 
+          sx={{ textDecoration: 'none', color: 'inherit', fontWeight: 'bold' }}
+        >
+          Plovo App
+        </Typography>
 
-    const goHome = () => {
-        navigate('/')
-    }
-
-    const goAddDish = () => {
-        navigate('/dish/create')
-    }
-
-    const goToBasket = () => {
-        navigate('/basket')
-    }
-
-    return(
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={goHome}
-          >
-            <FastfoodIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Plovo
-          </Typography>
-
-          <div style={{
-            display:'flex',
-            alignItems:'center',
-            gap: '8px',
-          }}>
-                <div style={{
-                display:'flex',
-                alignItems:'center',
-                gap: '8px',
-                }}>
-              <Typography>
-                total price: {totalPrice}$
-              </Typography>
-              <Typography>
-                total price: {totalCount}
-              </Typography>
-            </div>
-          <Button>
-            basket
-          </Button>
-
-          <Button color="inherit" onClick={goAddDish}>
-            Add Dish
-            </Button>
-            </div>
-        </Toolbar>
-      </AppBar>
-    </Box>
-    )
-}
+        {/* Кнопка перехода в корзину */}
+        <Button 
+          component={RouterLink} 
+          to="/basket" 
+          color="inherit"
+          startIcon={<ShoppingBasketIcon />}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 1 }}>
+            <Typography variant="caption" sx={{ lineHeight: 1 }}>
+              Items: <strong>{totalCount}</strong>
+            </Typography>
+            <Typography variant="caption" sx={{ lineHeight: 1 }}>
+              Total: <strong>{totalPrice} $</strong>
+            </Typography>
+          </Box>
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+};
