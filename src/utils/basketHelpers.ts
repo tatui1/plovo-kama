@@ -39,3 +39,47 @@ export const addDishToBasket = (currentState: IBasketState, dish: IDish): IBaske
     totalPrice,
   }
 }
+
+export const removeDishFromBasket = (currentState: IBasketState, dishId: string): IBasketState => {
+
+  const existingItemIndex = currentState.items.findIndex((item) => {
+    return item.dish.id === dishId
+  })
+
+  if (existingItemIndex === -1) {
+    return currentState
+  }
+
+  let newItems: IBasket[]
+  const item = currentState.items[existingItemIndex]
+
+  if (item.count > 1) {
+    newItems = currentState.items.map((it, index) => {
+      if (index === existingItemIndex) {
+        return {
+          ...it,
+          count: it.count - 1
+        }
+      }
+      return it
+    })
+  } else {
+    newItems = currentState.items.filter((it) => {
+      return it.dish.id !== dishId
+    })
+  }
+
+  const totalCount = newItems.reduce((sum, i) => {
+    return sum + i.count
+  }, 0)
+
+  const totalPrice = newItems.reduce((sum, i) => {
+    return sum + (i.dish.price * i.count)
+  }, 0)
+
+  return {
+    items: newItems,
+    totalCount,
+    totalPrice,
+  }
+}
