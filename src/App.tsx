@@ -26,11 +26,11 @@ function App() {
   }
 
   const handleRemoveDish = (dishId: string) => {
-  setBasket(prev => removeDishFromBasket(prev, dishId));
+  setBasket(prev => removeDishFromBasket(prev, dishId))
 }
 
 const clearBasket = () => {
-  setBasket({ items: [], totalCount: 0, totalPrice: 0 });
+  setBasket({ items: [], totalCount: 0, totalPrice: 0 })
 }
 
   return (
@@ -40,6 +40,10 @@ const clearBasket = () => {
       padding: '20px'
     }}>
       <Routes>
+        <Route path='/basket' element={<Basket basketState={basket} 
+        onAdd={handleAddDish} 
+        onRemove={handleRemoveDish} 
+        clearBasket={clearBasket}/>}/>
         <Route path='/' element={<Home addDishToBasket={nandleAddDish}/>}/>
         <Route path='/dish/:id' element={<Dish/>}/>
         <Route path='/dish/create' element={<AddDish/>}/>
