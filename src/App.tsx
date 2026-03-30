@@ -8,7 +8,7 @@ import { Container } from '@mui/material'
 import { EditDish } from './pages/edit-dish/EditDish'
 import type { IBasketState, IDish } from './types'
 import { useState } from 'react'
-import { addDishToBasket } from './utils/basketHelpers'
+import { addDishToBasket, removeDishFromBasket } from './utils/basketHelpers'
 import { Basket } from './pages/basket/Basket'
 
 function App() {
@@ -25,7 +25,13 @@ function App() {
     setBasket(updatedBasket)
   }
 
-  
+  const handleRemoveDish = (dishId: string) => {
+  setBasket(prev => removeDishFromBasket(prev, dishId));
+}
+
+const clearBasket = () => {
+  setBasket({ items: [], totalCount: 0, totalPrice: 0 });
+}
 
   return (
     <>
