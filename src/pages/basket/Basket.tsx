@@ -59,21 +59,17 @@ export const Basket = ({ basketState, onAdd, onRemove, clearBasket }: Props) => 
       <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
         Your Order
       </Typography>
-
-      {/* Список блюд с нумерацией */}
       <Box sx={{ mb: 4, mt: 4 }}>
         {items.map((item, index) => (
           <BasketItem
             key={item.dish.id}
             item={item}
-            index={index + 1} // Передаем номер товара
+            index={index + 1} 
             onAdd={() => onAdd(item.dish)}
             onRemove={() => onRemove(item.dish.id)}
           />
         ))}
       </Box>
-
-      {/* Итоговая информация: Количество и Цена */}
       <Box sx={{ 
         display: 'flex', 
         flexDirection: 'column', 
@@ -97,5 +93,5 @@ export const Basket = ({ basketState, onAdd, onRemove, clearBasket }: Props) => 
       
       <OrderForm onSubmit={handleOrderSubmit} loading={loading} />
     </Container>
-  );
-};
+  )
+}
