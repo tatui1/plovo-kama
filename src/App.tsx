@@ -16,22 +16,19 @@ function App() {
     items: [],
     totalCount: 0,
     totalPrice: 0
-  });
+  })
 
-  // Добавление блюда (кнопка "+" и кнопка в списке)
   const handleAddDish = (dish: IDish) => {
-    setBasket(prev => addDishToBasket(prev, dish));
-  };
+    setBasket(prev => addDishToBasket(prev, dish))
+  }
 
-  // Уменьшение количества или удаление (кнопка "-")
   const handleRemoveDish = (dishId: string) => {
-    setBasket(prev => removeDishFromBasket(prev, dishId));
-  };
+    setBasket(prev => removeDishFromBasket(prev, dishId))
+  }
 
-  // Полная очистка (вызывается после успешного заказа)
   const clearBasket = () => {
-    setBasket({ items: [], totalCount: 0, totalPrice: 0 });
-  };
+    setBasket({ items: [], totalCount: 0, totalPrice: 0 })
+  }
 
   return (
     <>
@@ -49,14 +46,11 @@ function App() {
                 basketState={basket} 
                 onAdd={handleAddDish} 
                 onRemove={handleRemoveDish} 
-                clearBasket={clearBasket}
-              />
-            }
-          />
+                clearBasket={clearBasket}/>}/>
         </Routes>
       </Container>
     </>
-  );
+  )
 }
 
 export default App;
